@@ -7,11 +7,15 @@ import NotificationCenter from "./components/notifications/NotificationCenter";
 function App() {
   return (
     <DesktopLayout>
-      <TopBar />
-      <div className="flex flex-1">
-        <Sidebar />
-        <EmailPanel />
+      <div className="flex flex-col h-full">
+        <TopBar />
+
+        <div className="flex flex-1 overflow-hidden">
+          <Sidebar />
+          <EmailPanel />
+        </div>
       </div>
+
       <NotificationCenter />
     </DesktopLayout>
   );
