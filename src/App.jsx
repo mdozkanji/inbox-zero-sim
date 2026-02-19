@@ -1,12 +1,19 @@
-import './App.css'
+import DesktopLayout from "./components/desktop/DesktopLayout";
+import TopBar from "./components/desktop/TopBar";
+import Sidebar from "./components/desktop/Sidebar";
+import EmailPanel from "./components/email/EmailPanel";
+import NotificationCenter from "./components/notifications/NotificationCenter";
 
 function App() {
   return (
-    <div className="h-screen bg-gray-900 text-white flex items-center justify-center">
-      <h1 className="text-4xl font-bold">
-        Inbox Zero Simulation
-      </h1>
-    </div>
+    <DesktopLayout>
+      <TopBar />
+      <div className="flex flex-1">
+        <Sidebar />
+        <EmailPanel />
+      </div>
+      <NotificationCenter />
+    </DesktopLayout>
   );
 }
 
