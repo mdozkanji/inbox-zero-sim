@@ -8,12 +8,43 @@ function EmailPanel() {
   );
 
   const [selectedEmail, setSelectedEmail] = useState(null)
+
   const [emailList, setEmailList] = useState(
     emails.map(email => ({
       ...email,
-      isRead: false
+      isRead: false,
+      isDeleted: false,
+      decision: null
     }))
   )
+
+  const handleAction = (actionType) => {
+    if (!selectedEmail) return;
+
+    console.log(`Action taken: ${actionType} on ${selectedEmail.subject}`);
+
+    setEmailList(prev => {
+      const updated = prev.map(email =>
+        email.id === selectedEmail.id
+          ? {
+              ...email,
+              decision: actionType,
+              isDeleted: actionType === "delete"
+            }
+          : email
+      );
+
+      const updatedSelected = updated.find(e => e.id === selectedEmail.id);
+
+      if (actionType === "delete") {
+        setSelectedEmail(null);
+      } else {
+        setSelectedEmail(updatedSelected);
+      }
+
+      return updated;
+    });
+  };
 
   return (
     <div className="flex-1 bg-gray-700 p-6 overflow-auto">
@@ -22,7 +53,9 @@ function EmailPanel() {
 
         <div className="email-panel">
           <div className="email-list">
-            {emailList.map((email) => (
+            {emailList
+              .filter(email => !email.isDeleted)
+              .map((email) => (
               <div
                 key={email.id}
                 className={`
@@ -60,9 +93,46 @@ function EmailPanel() {
             {selectedEmail ? (
               <>
                 <h2>{selectedEmail.subject}</h2>
+                {selectedEmail.decision && (
+                  <p className="mt-2 text-sm text-green-400">
+                    Action Taken: {selectedEmail.decision}
+                  </p>
+                )}
                 <p><strong>From:</strong> {selectedEmail.from}</p>
                 <hr />
                 <p>{selectedEmail.body}</p>
+
+                <div className="mt-6 flex gap-3">
+                  <button
+                    onClick={() => handleAction("reply")}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded"
+                  >
+                    Reply
+                  </button>
+
+                  <button
+                    onClick={() => handleAction("ignore")}
+                    className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded"
+                  >
+                    Ignore
+                  </button>
+
+                  <button
+                    onClick={() => handleAction("delete")}
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded"
+                  >
+                    Delete
+                  </button>
+
+                  {selectedEmail?.isPhishing && (
+                    <button
+                      onClick={() => handleAction("open-link")}
+                      className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 rounded"
+                    >
+                      Open Link
+                    </button>
+                  )}
+                </div>
               </>
             ) : (
               <p>Select an email to view</p>
