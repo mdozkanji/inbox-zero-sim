@@ -15,9 +15,21 @@ export const useSimulationStore = create((set) => ({
       inbox: emails,
     })),
 
-  addNotification: (notification) =>
+  addNotification: (message, type = "info") =>
     set((state) => ({
-      notifications: [...state.notifications, notification],
+      notifications: [
+        ...state.notifications,
+        {
+          id: Date.now(),
+          message,
+          type
+        }
+      ]
+    })),
+
+  removeNotification: (id) =>
+    set((state) => ({
+      notifications: state.notifications.filter(n => n.id !== id)
     })),
 
   updateThreatLevel: (amount) =>

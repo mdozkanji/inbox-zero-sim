@@ -1,6 +1,6 @@
 import { useSimulationStore } from "../../store/useSimulationStore";
 import { emails } from "../../data/emails"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function EmailPanel() {
   const updateThreatLevel = useSimulationStore(
@@ -37,14 +37,25 @@ function EmailPanel() {
       const updatedSelected = updated.find(e => e.id === selectedEmail.id);
 
       if (actionType === "delete") {
+        if (selectedEmail.isPhishing) {
+          addNotification("Phishing email removed. Good catch.", "success")
+        }
         setSelectedEmail(null);
-      } else {
-        setSelectedEmail(updatedSelected);
+      } else if (actionType === "open-link") {
+          addNotification("You clicked a suspicious link. Threat level rising.", "danger")
+        } else {
+          setSelectedEmail(updatedSelected);
       }
 
       return updated;
     });
   };
+
+  const addNotification = useSimulationStore(state => state.addNotification)
+
+  useEffect(() => {
+    addNotification("Inbox loaded. Stay alert.", "info")
+  }, [])
 
   return (
     <div className="flex-1 bg-gray-700 p-6 overflow-auto">
@@ -78,7 +89,7 @@ function EmailPanel() {
                 <strong className={email.isRead ? "font-normal" : "font-bold"}>
                   {email.subject}
                 </strong>
-                <p className={email.isRead ? "text-gray-400" : "text-white"}>
+                <p className={email.isRead ? "text-gray-400" : "text"}>
                   {email.preview}
                 </p>
                 <small>{email.from}</small>
@@ -93,11 +104,6 @@ function EmailPanel() {
             {selectedEmail ? (
               <>
                 <h2>{selectedEmail.subject}</h2>
-                {selectedEmail.decision && (
-                  <p className="mt-2 text-sm text-green-400">
-                    Action Taken: {selectedEmail.decision}
-                  </p>
-                )}
                 <p><strong>From:</strong> {selectedEmail.from}</p>
                 <hr />
                 <p>{selectedEmail.body}</p>
@@ -133,6 +139,11 @@ function EmailPanel() {
                     </button>
                   )}
                 </div>
+                {selectedEmail.decision && (
+                  <p className="mt-2 text-sm text-green-400">
+                    Action Taken: {selectedEmail.decision}
+                  </p>
+                )}
               </>
             ) : (
               <p>Select an email to view</p>
