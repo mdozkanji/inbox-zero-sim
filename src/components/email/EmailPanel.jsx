@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ThreatMeter from "./ThreatMeter";
+import ThreatMeter from "../threat-meter/ThreatMeter";
 
 // ── Icons ────────────────────────────────────────────────────────────────────
 

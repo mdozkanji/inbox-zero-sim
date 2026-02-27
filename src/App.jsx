@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TopBar from "./components/desktop/TopBar";
 import Dock from "./components/desktop/Dock";
 import Desktop from "./components/desktop/Desktop";
-import NotificationToast from "./components/NotificationToast";
+import NotificationToast from "./components/notifications/NotificationToast";
 import useSimulationStore from "./store/useSimulationStore";
 
 function formatTime(date) {

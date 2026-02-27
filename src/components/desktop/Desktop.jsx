@@ -1,4 +1,4 @@
-import EmailPanel from "./EmailPanel";
+import EmailPanel from "../email/EmailPanel";
 
 export default function Desktop({ emails, emailStates, selectedId, onSelect, onAction, threatLevel }) {
   return (
