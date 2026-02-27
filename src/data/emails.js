@@ -1,101 +1,108 @@
-export const emails = [
+const RAW_EMAILS = [
   {
-    id: "email_001",
-    from: "HR Department <hr@company-portal.com>",
-    subject: "Updated Remote Work Policy",
-    preview: "Please review the updated policy document before Friday.",
-    body: `
-Hi Team,
+    id: "e001",
+    from: "hr@acmecorp.com",
+    subject: "Q3 Performance Review Scheduled",
+    preview: "Your performance review has been scheduled for next Thursday...",
+    body: `Hi,
 
-We have updated our remote work policy for Q3.
+Your Q3 performance review has been scheduled for Thursday, October 19th at 2:00 PM in Conference Room B.
 
-Please review the attached document and confirm acknowledgment in the HR portal by Friday.
+Please come prepared with a brief summary of your key accomplishments and any blockers you've encountered this quarter.
+
+Your manager, Dana Reeves, will be leading the session. If you have any conflicts, please reach out at least 48 hours in advance.
 
 Best,
-Clara
-HR Department
-    `,
+Human Resources
+Acme Corp`,
     isPhishing: false,
-    difficulty: 1
+    difficulty: 1,
   },
-
   {
-    id: "email_002",
-    from: "IT Support <it-support@company.com>",
-    subject: "Scheduled System Maintenance",
-    preview: "There will be downtime tonight from 10 PM to 12 AM.",
-    body: `
-Hello,
+    id: "e002",
+    from: "noreply@github.com",
+    subject: "New sign-in to your GitHub account",
+    preview: "A new sign-in was detected from San Francisco, CA...",
+    body: `Hi there,
 
-Please note that system maintenance is scheduled tonight from 10 PM to 12 AM.
+We noticed a new sign-in to your GitHub account from:
 
-You may experience temporary login issues during this time.
+Location: San Francisco, CA, US
+Device: Chrome on macOS
+Time: Oct 17, 2024 at 09:41 AM PDT
 
-Thank you,
-IT Support
-    `,
+If this was you, no action is needed.
+
+If you don't recognize this activity, please secure your account immediately at github.com/settings/security.
+
+GitHub Security Team`,
     isPhishing: false,
-    difficulty: 1
+    difficulty: 1,
   },
-
   {
-    id: "email_003",
-    from: "Payroll <payroll@company.com>",
-    subject: "Payslip for September Available",
-    preview: "Your latest payslip has been uploaded to the portal.",
-    body: `
-Hi,
+    id: "e003",
+    from: "devops@acmecorp.com",
+    subject: "Scheduled maintenance window - Saturday 02:00 UTC",
+    preview: "Planned downtime for infrastructure upgrades this weekend...",
+    body: `Team,
 
-Your September payslip is now available on the payroll portal.
+We have a scheduled maintenance window this Saturday from 02:00–04:00 UTC for infrastructure upgrades including database patching and load balancer configuration changes.
 
-Please log in through the official HR system to access it.
+Expected impact: API services may be intermittently unavailable. Internal dashboards will be in read-only mode.
 
-Regards,
-Finance Team
-    `,
+No action required from engineering. Monitoring will be active throughout.
+
+If you have deployments planned for this window, please coordinate with the DevOps team by EOD Friday.
+
+— DevOps
+Acme Corp Infrastructure`,
     isPhishing: false,
-    difficulty: 2
+    difficulty: 1,
   },
-
   {
-    id: "email_004",
-    from: "Security Alert <security@company-secure.co>",
-    subject: "Urgent: Account Verification Required",
-    preview: "Your account will be suspended within 24 hours.",
-    body: `
-Dear User,
+    id: "e004",
+    from: "security-alert@amaz0n-notifications.com",
+    subject: "URGENT: Your account has been suspended",
+    preview: "We have detected unusual activity. Verify your account immediately...",
+    body: `Dear Valued Customer,
 
-We detected unusual activity in your account.
+We have detected UNUSUAL ACTIVITY on your Amazon account. To protect you, we have temporarily suspended your account.
 
-You must verify your credentials within 24 hours or your access will be permanently suspended.
+Your account will be PERMANENTLY CLOSED in 24 hours unless you verify your identity immediately.
 
-Click the link below immediately:
-http://company-secure-verification.com
+Click the link below to restore access:
 
-Security Team
-    `,
+http://amaz0n-secure-verify.net/restore?token=xR7k2mP9
+
+You must provide your full name, billing address, credit card details, and account password to complete verification.
+
+Failure to act will result in permanent account termination.
+
+Amazon Security Team`,
     isPhishing: true,
-    difficulty: 2
+    difficulty: 1,
   },
-
   {
-    id: "email_005",
-    from: "CEO Office <ceo-office@companny.com>",
-    subject: "Quick Favor Needed",
-    preview: "I need you to purchase gift cards urgently.",
-    body: `
-Hi,
+    id: "e005",
+    from: "ceo@acmecorp-corp.com",
+    subject: "Quick favor needed - confidential",
+    preview: "Hey, I need you to handle something for me urgently...",
+    body: `Hey,
 
-Are you available right now?
+I'm in back-to-back meetings all day and can't take calls. I need you to handle something urgent for me.
 
-I’m in a meeting and need you to urgently purchase $500 in gift cards for a client. I will reimburse you.
+I need you to purchase $500 in Amazon gift cards for client appreciation. Get 5x $100 cards. Once you have them, scratch the back and email me the redemption codes directly.
 
-Reply once done.
+I'll explain the full context when I'm out of meetings. This is time-sensitive — the client presentation is at 3 PM.
+
+Don't discuss this with anyone else yet, I'll loop in finance afterward.
 
 Thanks,
-Michael
-    `,
+Marcus Webb
+CEO, Acme Corp`,
     isPhishing: true,
-    difficulty: 3
-  }
-]
+    difficulty: 3,
+  },
+];
+
+export default RAW_EMAILS;
